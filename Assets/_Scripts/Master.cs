@@ -12,14 +12,34 @@ public class Master : MonoBehaviour
     public Stats stats = new Stats();
     public Perks perks = new();
     public float destroyTimer = 5.1f;
-
     public int[] treeModifiers;
-    private int[] rootStats;
-    private int[] perksStats;
+    public int[] perksModifiers;
+    public int[] seasonModifiers;
+    public Season currentSeason;
+    public int currentSeasonIndex;
+    public int daysPassed;
+    public int season;
+    public enum Season
+    {
+        Spring,
+        Summer,
+        Autumn,
+        Winter
+    }
 
     void Start()
     {
         InvokeRepeating("UpdateEverySecond", 0.0f, 1.0f);
+    }
+    
+    void Update()
+    {
+        daysPassed++;
+        season = (daysPassed % 365) / 91;
+        if (season != currentSeasonIndex)
+        {
+            ChangeSeason();
+        }
     }
 
     void UpdateEverySecond()
@@ -30,6 +50,32 @@ public class Master : MonoBehaviour
         stats.light += treeModifiers[2];
         stats.co2 += treeModifiers[3];
 
+    }
+
+    public void ChangeSeason()
+    {
+        currentSeasonIndex = (currentSeasonIndex + 1) % 4;
+        currentSeason = (Season)currentSeasonIndex;
+        SeasonModifiers();
+    }
+
+    public void SeasonModifiers()
+    {
+        switch(currentSeason)
+        {
+            case Season.Winter:
+                seasonModifiers = new int[] {-3, -3, 0, 0};
+                break;
+            case Season.Spring:
+                seasonModifiers = new int[] {-1, 1, 2, 2};
+                break;
+            case Season.Summer:
+                seasonModifiers = new int[] {-10, 0, 5, 5};
+                break;
+            case Season.Autumn:
+                seasonModifiers = new int[] {3, 3, 1, 1};
+                break;
+        }
     }
 
     private void GetTreeModifiers()
