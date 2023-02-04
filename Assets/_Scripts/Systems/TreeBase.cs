@@ -35,10 +35,7 @@ public class TreeBase : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Grow();
-        }
+
     }
 
     public void Grow()
