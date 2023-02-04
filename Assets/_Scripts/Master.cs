@@ -11,6 +11,7 @@ public class Master : MonoBehaviour
     public List<GameObject> roots = new();
     public Stats stats = new Stats();
     public Perks perks = new();
+    public float destroyTimer = 5.1f;
 
     public int[] treeModifiers;
     private int[] rootStats;
