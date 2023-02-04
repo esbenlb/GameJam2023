@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class GameUI : MonoBehaviour
 {
+    //  values to display and text field refs
+
+    [SerializeField] public float [] values;
+    [SerializeField] TextMeshProUGUI resourcesText;
+
+    //  treeBase refs
+
     public TreeBase treeBaseClass;
     public static bool upgradeAvailable;
+
     //  Sound effect refs
     public  AudioSource clickUpgradeSound;
     public  AudioSource hoverUpgradeSound;
@@ -18,17 +27,17 @@ public class GameUI : MonoBehaviour
     public int resource;
     public int upgradeCost;
 
-    void Start() {
-        //growBtn.GetComponent<Button>().enabled = false;
+    void Update() {
+        updateUIText();
     }
 
-    void Update() {
-        /*
-        if(!growBtn.GetComponent<Button>().enabled && upgradeAvailable)
-            growBtn.GetComponent<Button>().enabled = true;
-        if(growBtn.GetComponent<Button>().enabled && !upgradeAvailable)
-            growBtn.GetComponent<Button>().enabled = false;
-            */
+    private void updateUIText() {
+        resourcesText.text = 
+        "Water    - " + Mathf.FloorToInt(values[0]).ToString() + "\n" +
+        "Nitrogen - " + Mathf.FloorToInt(values[1]).ToString() + "\n" +
+        "Light    - " + Mathf.FloorToInt(values[2]).ToString() + "\n" +
+        "CO2      - " + Mathf.FloorToInt(values[3]).ToString() + "\n"
+        ;
     }
 
     public void Upgrade() {
