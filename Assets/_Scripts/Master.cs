@@ -11,6 +11,7 @@ public class Master : MonoBehaviour
     public List<GameObject> roots = new();
     public Stats stats = new();
     public Perks perks = new();
+    public float destroyTimer = 5.1f;
 
 
     // example funcAddPerk. in this case, can only get perk:coldResist IF has 100 water AND dosen't have heatResist

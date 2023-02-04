@@ -5,6 +5,7 @@ using UnityEngine;
 public class SnakeMovement : MonoBehaviour
 {
     float speed = 0.1f;
+    
 
     Vector2Int direction = Vector2Int.right;
     Vector2Int oppositeDirection = Vector2Int.left;
@@ -16,13 +17,21 @@ public class SnakeMovement : MonoBehaviour
     {
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
         InvokeRepeating("Move", 0.3f, 0.1f);
+        InvokeRepeating("DestroyRoot", master.destroyTimer, 1.0f);
     }
 
     void Update()
     {
         ChangeDirection();
-        
 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            DestroyRoot();
+        }
+    }
+    private void DestroyRoot()
+    {
+        Destroy(gameObject);
     }
 
 
