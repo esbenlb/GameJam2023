@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1504166751706407447}
   - component: {fileID: 5353313265523197508}
   m_Layer: 0
-  m_Name: SmallCircle
+  m_Name: SmallCircle 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.8584906, g: 0.6157423, b: 0.40818796, a: 1}
+  m_Color: {r: 0.33962262, g: 0.15652174, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

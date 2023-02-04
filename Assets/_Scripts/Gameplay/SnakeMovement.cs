@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour
 {
-    float speed = 5.0f;
+    float speed = 0.1f;
 
     Vector2Int direction = Vector2Int.right;
     Vector2Int oppositeDirection = Vector2Int.left;
-    List<Transform> tail = new List<Transform>();
+    List<Transform> tail = new();
+    private Master master;
+    
 
     void Start()
     {
-        InvokeRepeating("Move", 0.3f, 0.2f);
+        master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
+        InvokeRepeating("Move", 0.3f, 0.1f);
     }
 
     void Update()
+    {
+        ChangeDirection();
+        
+
+    }
+
+
+    void ChangeDirection()
     {
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 targetDirection = transform.position - worldPosition;
@@ -32,28 +43,37 @@ public class SnakeMovement : MonoBehaviour
         {
             direction = Vector2Int.down;
         }
-        else { 
+        // diagonally direction
+        else
+        {
             direction = Vector2Int.down;
         }
         oppositeDirection = -direction;
-        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Resources resource;
+        if (collision.GetComponent<Resources>())
+        {
+            resource = collision.GetComponent<Resources>();
+            if (resource.CurrentResourceType == Resources.ResourseType.Rock)
+            {
+                Destroy(gameObject);
+            }
+        }
+
     }
 
     void Move()
     {
-        transform.position -= new Vector3(direction.x,direction.y,0);
+        transform.position -= new Vector3(direction.x,direction.y,0) * speed;
+        GameObject go = Instantiate(master.newRoot, transform.position, Quaternion.identity);
+        go.AddComponent<BoxCollider2D>().isTrigger = true;
+        go.AddComponent<Resources>().CurrentResourceType = Resources.ResourseType.SpawingPoint;
+        go.transform.parent = master.transform;
+        master.roots.Add(go);
+
 
     }
-
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.CompareTag("Food"))
-    //    {
-    //        GameObject food = other.gameObject;
-    //        food.SetActive(false);
-    //
-    //        Transform newTail = Instantiate(food.transform, position, Quaternion.identity);
-    //        tail.Add(newTail);
-    //    }
-    //}
 }

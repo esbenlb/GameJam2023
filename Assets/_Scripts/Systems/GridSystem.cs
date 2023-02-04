@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridSystem : MonoBehaviour
 {
-    public const int xSize = 20, ySize = 4;
+    public const int xSize = 40, ySize = 4;
     public float tileSize = 0.6f;
     //public int halfX, halfY;
     public GameObject[][] tiles = new GameObject[ySize][];
