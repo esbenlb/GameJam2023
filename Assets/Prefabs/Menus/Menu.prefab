@@ -484,8 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87c30b4f69cf91541aee7f1f9c1b3b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickSound: {fileID: 3664037439635481043}
-  hoverSound: {fileID: 1743089679945869615}
+  clickSound: {fileID: 1743089679945869615}
+  hoverSound: {fileID: 3664037439635481043}
   startMenu: {fileID: 1464050966428716415}
   settingsMenu: {fileID: 1464050966668571639}
   globalAudioSlider: {fileID: 1464050965341086504}
@@ -499,7 +499,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3c631e374feed7d40a8d65460796ffea, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 568f9cb9360542a40950df98197bee08, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -595,7 +595,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c849f441a444b704384ba1e28001ff2a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8b881ea265affd54286275aeb68d9fa3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
