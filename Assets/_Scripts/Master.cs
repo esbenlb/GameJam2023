@@ -7,19 +7,39 @@ public class Master : MonoBehaviour
 {
     public GameObject newRoot;
     public GameObject snake;
+    public GameObject[] resources;
     public List<GameObject> roots = new();
     public Stats stats = new();
-    
+    public Perks perks = new();
+
+
+    // example funcAddPerk. in this case, can only get perk:coldResist IF has 100 water AND dosen't have heatResist
+    public void AddPerkColdResist()
+    {
+        if (stats.water >= 100 && perks.heatResist == false)
+        {
+            stats.water -= 100;
+            perks.coldResist = true;
+
+        }
+    }
 }
 
 public class Perks
 {
     private bool m_coldResist;
-    public bool water
+    private bool m_heatResist;
+    public bool coldResist
     {
         get { return m_coldResist; }
-        set { 
-            m_coldResist = value; 
+        set { m_coldResist = value; }
+    }
+    public bool heatResist
+    {
+        get { return m_heatResist; }
+        set
+        {
+                m_heatResist = value;
         }
     }
 }
