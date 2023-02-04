@@ -12,6 +12,7 @@ public class GameUI : MonoBehaviour
     //  values to display and text field refs
 
     [SerializeField] TextMeshProUGUI resourcesText;
+    [SerializeField] TextMeshProUGUI resourcesTextVals;
 
     //  treeBase refs
 
@@ -25,10 +26,6 @@ public class GameUI : MonoBehaviour
     //  Button refs
     public GameObject growBtn;
 
-    //  resource refs
-    public int resource;
-    public int upgradeCost;
-
     void Start() {
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
         GameObject Tree = GameObject.Find("Tree");
@@ -41,9 +38,16 @@ public class GameUI : MonoBehaviour
 
     private void updateUIText() {
         resourcesText.text = 
-        "Light    " + master.stats.light.ToString() + "\n" +
-        "Water    " + master.stats.water.ToString() + "\n" +
-        "Nitrogen " + master.stats.nitrogen.ToString() + "\n"
+        "CO2\n"+
+        "Light\n"+
+        "Water\n"+
+        "Nitrogen\n"
+        ;
+        resourcesTextVals.text =
+        master.stats.co2.ToString("D2") + "\n" +
+        master.stats.light.ToString("D2") + "\n" +
+        master.stats.water.ToString("D2") + "\n" +
+        master.stats.nitrogen.ToString("D2") + "\n"
         ;
     }
 
