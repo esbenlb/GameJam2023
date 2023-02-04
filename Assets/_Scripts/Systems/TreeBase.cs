@@ -27,6 +27,7 @@ public class TreeBase : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("TreeBase");
         currentGrowthStage = (GrowthStage)currentGrowthIndex;
         growthStageCount = System.Enum.GetValues(typeof(GrowthStage)).Length;
         SetPrefab();
@@ -36,6 +37,11 @@ public class TreeBase : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void Test()
+    {
+        Debug.Log("test");
     }
 
     public void Grow()
