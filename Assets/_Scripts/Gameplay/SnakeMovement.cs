@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour
 {
-    float speed = 0.1f;
+    float speed = 0.03f;
     
 
     Vector2Int direction = Vector2Int.right;
@@ -16,7 +16,7 @@ public class SnakeMovement : MonoBehaviour
     void Start()
     {
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
-        InvokeRepeating("Move", 0.3f, 0.1f);
+        InvokeRepeating("Move", 0.1f, 0.05f);
         InvokeRepeating("DestroyRoot", master.destroyTimer, 1.0f);
     }
 
@@ -93,7 +93,5 @@ public class SnakeMovement : MonoBehaviour
         go.AddComponent<Resources>().CurrentResourceType = Resources.ResourseType.SpawingPoint;
         go.transform.parent = master.transform;
         master.roots.Add(go);
-
-
     }
 }

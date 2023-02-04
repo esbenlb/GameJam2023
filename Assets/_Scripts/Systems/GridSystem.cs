@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GridSystem : MonoBehaviour
-{
-    const int xSize = 150, ySize = 25;
+{   
+    //  Set size
+    const int xSize = 275, ySize = 105;
+    const int bla = ySize / 5;
     float tileSize = 0.15f;
     //public int halfX, halfY;
     public GameObject[][] tiles = new GameObject[ySize][];
@@ -30,7 +32,7 @@ public class GridSystem : MonoBehaviour
         // Create map
         for (int y = 0; y < ySize; y++)
         {
-            if ((y % 5) == 1)
+            if ((y % bla) == 1)
             {
                 hasIncreasedSpawingRate = false;
             }

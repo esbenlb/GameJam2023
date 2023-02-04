@@ -10,16 +10,16 @@ public class TreeBase : MonoBehaviour
     private int growthStageCount = 0;
     public GrowthStage currentGrowthStage;
 
-    public float waterUsage;
-    public float nitrogenUsage;
-    public float lightGain;
-    public float co2Gain;
+    public int waterUsage;
+    public int nitrogenUsage;
+    public int lightGain;
+    public int co2Gain;
     public enum GrowthStage
     {
         Seed,
         Sprout,
-        Seedling,
         Sapling,
+        YoungTree,
         Mature,
         Elder
     }
@@ -27,21 +27,17 @@ public class TreeBase : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("TreeBase");
         currentGrowthStage = (GrowthStage)currentGrowthIndex;
         growthStageCount = System.Enum.GetValues(typeof(GrowthStage)).Length;
         SetPrefab();
         SetModifiers();
     }
-    
-    void Update()
-    {
 
-    }
 
-    public void Test()
+    public int[] GetModifiers()
     {
-        Debug.Log("test");
+        int[] integers = { waterUsage, nitrogenUsage, lightGain, co2Gain };
+        return integers;
     }
 
     public void Grow()
@@ -63,40 +59,40 @@ public class TreeBase : MonoBehaviour
         switch(currentGrowthStage)
         {
             case GrowthStage.Seed:
-                waterUsage = 1f;
-                nitrogenUsage = 0.2f;
-                lightGain = 0f;
-                co2Gain = 0f;
+                waterUsage = -5;
+                nitrogenUsage = -1;
+                lightGain = 0;
+                co2Gain = 0;
                 break;
             case GrowthStage.Sprout:
-                waterUsage = 2f;
-                nitrogenUsage = 0.4f;
-                lightGain = 1f;
-                co2Gain = 1f;
-                break;
-            case GrowthStage.Seedling:
-                waterUsage = 4f;
-                nitrogenUsage = 0.8f;
-                lightGain =2f;
-                co2Gain = 2f;
+                waterUsage = -10;
+                nitrogenUsage = -2;
+                lightGain = 5;
+                co2Gain = 5;
                 break;
             case GrowthStage.Sapling:
-                waterUsage = 8f;
-                nitrogenUsage = 1.6f;
-                lightGain = 4f;
-                co2Gain = 4f;
+                waterUsage = -20;
+                nitrogenUsage = -4;
+                lightGain =10;
+                co2Gain = 10;
+                break;
+            case GrowthStage.YoungTree:
+                waterUsage = -40;
+                nitrogenUsage = -8;
+                lightGain = 20;
+                co2Gain = 20;
                 break;
             case GrowthStage.Mature:
-                waterUsage = 16f;
-                nitrogenUsage = 3.2f;
-                lightGain = 8f;
-                co2Gain = 8f;
+                waterUsage = -80;
+                nitrogenUsage = -16;
+                lightGain = 40;
+                co2Gain = 40;
                 break;
             case GrowthStage.Elder:
-                waterUsage = 32f;
-                nitrogenUsage = 6.4f;
-                lightGain = 16f;
-                co2Gain = 16f;
+                waterUsage = -160;
+                nitrogenUsage = -32;
+                lightGain = 80;
+                co2Gain = 80;
                 break;
         }
     }

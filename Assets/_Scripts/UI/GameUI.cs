@@ -6,10 +6,13 @@ using TMPro;
 
 public class GameUI : MonoBehaviour
 {
+
+    private Master master;
+
     //  values to display and text field refs
 
-    [SerializeField] public float [] values;
     [SerializeField] TextMeshProUGUI resourcesText;
+    [SerializeField] TextMeshProUGUI resourcesTextVals;
 
     //  treeBase refs
 
@@ -23,9 +26,11 @@ public class GameUI : MonoBehaviour
     //  Button refs
     public GameObject growBtn;
 
-    //  resource refs
-    public int resource;
-    public int upgradeCost;
+    void Start() {
+        master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
+        GameObject Tree = GameObject.Find("Tree");
+        TreeBase treeBase = Tree.GetComponent<TreeBase>();
+    }
 
     void Update() {
         updateUIText();
@@ -33,10 +38,16 @@ public class GameUI : MonoBehaviour
 
     private void updateUIText() {
         resourcesText.text = 
-        "Water    - " + Mathf.FloorToInt(values[0]).ToString() + "\n" +
-        "Nitrogen - " + Mathf.FloorToInt(values[1]).ToString() + "\n" +
-        "Light    - " + Mathf.FloorToInt(values[2]).ToString() + "\n" +
-        "CO2      - " + Mathf.FloorToInt(values[3]).ToString() + "\n"
+        "CO2\n"+
+        "Light\n"+
+        "Water\n"+
+        "Nitrogen\n"
+        ;
+        resourcesTextVals.text =
+        master.stats.co2.ToString("D2") + "\n" +
+        master.stats.light.ToString("D2") + "\n" +
+        master.stats.water.ToString("D2") + "\n" +
+        master.stats.nitrogen.ToString("D2") + "\n"
         ;
     }
 
