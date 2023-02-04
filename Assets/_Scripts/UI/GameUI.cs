@@ -9,10 +9,7 @@ public class GameUI : MonoBehaviour
     //  values to display and text field refs
 
     [SerializeField] public float [] values;
-    [SerializeField] TextMeshProUGUI resource1Text;
-    [SerializeField] TextMeshProUGUI resource2Text;
-    [SerializeField] TextMeshProUGUI resource3Text;
-    [SerializeField] TextMeshProUGUI resource4Text;
+    [SerializeField] TextMeshProUGUI resourcesText;
 
     //  treeBase refs
 
@@ -35,10 +32,12 @@ public class GameUI : MonoBehaviour
     }
 
     private void updateUIText() {
-        resource1Text.text = "Water    - " + Mathf.FloorToInt(values[0]).ToString() + "\n";
-        resource2Text.text = "Nitrogen - " + Mathf.FloorToInt(values[1]).ToString() + "\n";
-        resource3Text.text = "Light    - " + Mathf.FloorToInt(values[2]).ToString() + "\n";
-        resource4Text.text = "CO2      - " + Mathf.FloorToInt(values[3]).ToString() + "\n";
+        resourcesText.text = 
+        "Water    - " + Mathf.FloorToInt(values[0]).ToString() + "\n" +
+        "Nitrogen - " + Mathf.FloorToInt(values[1]).ToString() + "\n" +
+        "Light    - " + Mathf.FloorToInt(values[2]).ToString() + "\n" +
+        "CO2      - " + Mathf.FloorToInt(values[3]).ToString() + "\n"
+        ;
     }
 
     public void Upgrade() {
