@@ -6,13 +6,15 @@ public class CameraController : MonoBehaviour
 {
     private Master master;
     GameObject camera;
+
+    private Vector3 initCamPos;
     bool fullScreen = true;
     // Start is called before the first frame update
     void Start()
     {
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
         camera = transform.GetChild(0).gameObject;
-        camera.transform.position = new(10, 4.45f, -10);
+        initCamPos = camera.transform.position;
     }
 
     // Update is called once per frame
