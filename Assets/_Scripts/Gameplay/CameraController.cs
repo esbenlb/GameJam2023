@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
     {
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
         camera = transform.GetChild(0).gameObject;
+        camera.transform.position = new(10, 4.45f, -10);
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class CameraController : MonoBehaviour
         MouseClick();
         if (fullScreen == false && Input.GetKeyDown(KeyCode.Space))
         {
-            camera.transform.position = new(10, 4.5f, -10);
+            camera.transform.position = new(10, 4.45f, -10);
             camera.GetComponent<Camera>().orthographicSize = 5;
             fullScreen = true;
         }

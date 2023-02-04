@@ -5,35 +5,35 @@ using UnityEngine;
 
 public class GameUI : MonoBehaviour
 {
-    private bool isPlayingBefTrans;
-    
+    public TreeBase treeBaseClass;
+    public static bool upgradeAvailable;
     //  Sound effect refs
     public  AudioSource clickUpgradeSound;
     public  AudioSource hoverUpgradeSound;
 
     //  Button refs
-    public Button growBtn;
+    public GameObject growBtn;
 
     //  resource refs
     public int resource;
     public int upgradeCost;
 
     void Start() {
-        growBtn.enabled = false;
+        //growBtn.GetComponent<Button>().enabled = false;
     }
 
     void Update() {
-        if(resource >= upgradeCost && !growBtn.enabled)
-            growBtn.enabled = true;
-        else
-            growBtn.enabled = false;
+        /*
+        if(!growBtn.GetComponent<Button>().enabled && upgradeAvailable)
+            growBtn.GetComponent<Button>().enabled = true;
+        if(growBtn.GetComponent<Button>().enabled && !upgradeAvailable)
+            growBtn.GetComponent<Button>().enabled = false;
+            */
     }
 
     public void Upgrade() {
-        if(resource >= upgradeCost) {
-            resource -= upgradeCost;
-            //  Upgrade *= 2;
-        }
+        if(upgradeAvailable)
+            treeBaseClass.Grow();
     }
 
     public void HoverSound() {

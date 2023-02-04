@@ -303,11 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c484693bae59444a63d0a1994307f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trunks:
-  - {fileID: 2574972286274840807, guid: e424f420013477c44b11e4aa4e783f37, type: 3}
-  crowns:
-  - {fileID: 49434031239189563, guid: 70c8970240751e440a7635cbe505b210, type: 3}
-  water: 0
+  trunks: []
+  crowns: []
 --- !u!4 &1083159730
 Transform:
   m_ObjectHideFlags: 0

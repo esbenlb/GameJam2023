@@ -61,6 +61,17 @@ public class SnakeMovement : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+            else if (resource.CurrentResourceType == Resources.ResourseType.Nitrogen)
+            {
+                Destroy(collision.gameObject);
+                master.stats.nitrogen += 10;
+            }
+            else if (resource.CurrentResourceType == Resources.ResourseType.Water)
+            {
+                Destroy(gameObject);
+                Destroy(collision.gameObject);
+                master.stats.water += 10;
+            }
         }
 
     }
