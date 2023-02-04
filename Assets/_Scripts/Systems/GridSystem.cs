@@ -4,41 +4,96 @@ using UnityEngine;
 
 public class GridSystem : MonoBehaviour
 {
-    public const int xSize = 40, ySize = 4;
-    public float tileSize = 0.6f;
+    const int xSize = 150, ySize = 25;
+    float tileSize = 0.15f;
     //public int halfX, halfY;
     public GameObject[][] tiles = new GameObject[ySize][];
     public GameObject tile;
+    private Master master;
 
     GameObject CreateTile(Vector3 tilePosition)
     {
-        //GameObject go = new();
         GameObject go = Instantiate(tile);
         go.name = "Tile(X:" + tilePosition.x + ",Y:" + tilePosition.y + ")";
         go.transform.position = new Vector3(tilePosition.x, tilePosition.y, 1);
         return go;
     }
-    void GenerateMap()
+    void GenerateMap(bool spawnRooks = false)
     {
         GameObject world = new();
+
+        // 1 to 100%
+        float rockChance = 5;
+        float waterChance = 5;
+        float nitrogenChance = 5;
+        bool hasIncreasedSpawingRate = false;
         // Create map
         for (int y = 0; y < ySize; y++)
         {
+            if ((y % 5) == 1)
+            {
+                hasIncreasedSpawingRate = false;
+            }
+            if (hasIncreasedSpawingRate == false && (y % 5) == 0)
+            {
+                rockChance -= 1;
+                waterChance -= 1;
+                nitrogenChance -= 1;
+                hasIncreasedSpawingRate = true;
+            }
+            
             tiles[y] = new GameObject[xSize];
             for (int x = 0; x < xSize; x++)
             {
-                // Tile get realworld position, other tileAddOn use this
+               
+
+
+                // MainTile: Tile get realworld position, other tileAddOn use this
                 GameObject tile = CreateTile(new Vector3(x * tileSize, y * tileSize, 1));
                 tile.transform.parent = world.transform;
-                
                 tiles[y][x] = tile;
+
+                // Children
+                int tileType = 0;
+                float tmpTileSize = tileSize;
+
+                // Rock
+                if (spawnRooks && Random.Range(0, 100) <= rockChance )
+                {
+                    tmpTileSize = tileSize * Random.Range(0, 3);
+                    tileType = 0;
+                }
+                // water
+                else if (Random.Range(0, 100) <= waterChance)
+                {
+                    tmpTileSize = tileSize *Random.Range(0, 3);
+                    tileType = 1;
+                }
+                // nitrogen
+                else if (Random.Range(0, 100) <= nitrogenChance)
+                {
+                    tileType = 2;
+                }
+                else 
+                {
+                    // Nothing
+                    tileType = -1;
+                }
+                if (tileType != -1)
+                {
+                    GameObject go = Instantiate(master.resources[tileType], tile.transform.position, Quaternion.identity);
+                    go.transform.localScale *= tmpTileSize;
+                    go.transform.parent = tile.transform;
+                }
+
             }
         }
     }
     // Start is called before the first frame update
     void Start()
     {
-        GenerateMap();
+        master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
+        GenerateMap(true);
     }
 
 
