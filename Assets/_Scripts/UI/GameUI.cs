@@ -6,9 +6,11 @@ using TMPro;
 
 public class GameUI : MonoBehaviour
 {
+
+    private Master master;
+
     //  values to display and text field refs
 
-    [SerializeField] public float [] values;
     [SerializeField] TextMeshProUGUI resourcesText;
 
     //  treeBase refs
@@ -27,16 +29,21 @@ public class GameUI : MonoBehaviour
     public int resource;
     public int upgradeCost;
 
+    void Start() {
+        master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
+        GameObject Tree = GameObject.Find("Tree");
+        TreeBase treeBase = Tree.GetComponent<TreeBase>();
+    }
+
     void Update() {
         updateUIText();
     }
 
     private void updateUIText() {
         resourcesText.text = 
-        "Water    - " + Mathf.FloorToInt(values[0]).ToString() + "\n" +
-        "Nitrogen - " + Mathf.FloorToInt(values[1]).ToString() + "\n" +
-        "Light    - " + Mathf.FloorToInt(values[2]).ToString() + "\n" +
-        "CO2      - " + Mathf.FloorToInt(values[3]).ToString() + "\n"
+        "Light    " + master.stats.light.ToString() + "\n" +
+        "Water    " + master.stats.water.ToString() + "\n" +
+        "Nitrogen " + master.stats.nitrogen.ToString() + "\n"
         ;
     }
 
