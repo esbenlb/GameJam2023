@@ -8,7 +8,7 @@ public class GameUI : MonoBehaviour
 {
     //  values to display and text field refs
 
-    [SerializeField] public int [] values;
+    [SerializeField] public float [] values;
     [SerializeField] TextMeshProUGUI resource1Text;
     [SerializeField] TextMeshProUGUI resource2Text;
     [SerializeField] TextMeshProUGUI resource3Text;
@@ -30,25 +30,15 @@ public class GameUI : MonoBehaviour
     public int resource;
     public int upgradeCost;
 
-    void Start() {
-        //growBtn.GetComponent<Button>().enabled = false;
-    }
-
     void Update() {
         updateUIText();
-        /*
-        if(!growBtn.GetComponent<Button>().enabled && upgradeAvailable)
-            growBtn.GetComponent<Button>().enabled = true;
-        if(growBtn.GetComponent<Button>().enabled && !upgradeAvailable)
-            growBtn.GetComponent<Button>().enabled = false;
-            */
     }
 
     private void updateUIText() {
-        resource1Text.text = "Value 1 - " + values[0]ToString();
-        resource2Text.text = "Value 2 - " + values[1]ToString();
-        resource3Text.text = "Value 3 - " + values[2]ToString();
-        resource4Text.text = "Value 4 - " + values[3]ToString();
+        resource1Text.text = "Water    - " + Mathf.FloorToInt(values[0]).ToString() + "\n";
+        resource2Text.text = "Nitrogen - " + Mathf.FloorToInt(values[1]).ToString() + "\n";
+        resource3Text.text = "Light    - " + Mathf.FloorToInt(values[2]).ToString() + "\n";
+        resource4Text.text = "CO2      - " + Mathf.FloorToInt(values[3]).ToString() + "\n";
     }
 
     public void Upgrade() {
