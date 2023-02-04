@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine;
+
+public class GameUI : MonoBehaviour
+{
+    public TreeBase treeBaseClass;
+    public static bool upgradeAvailable;
+    //  Sound effect refs
+    public  AudioSource clickUpgradeSound;
+    public  AudioSource hoverUpgradeSound;
+
+    //  Button refs
+    public GameObject growBtn;
+
+    //  resource refs
+    public int resource;
+    public int upgradeCost;
+
+    void Start() {
+        //growBtn.GetComponent<Button>().enabled = false;
+    }
+
+    void Update() {
+        /*
+        if(!growBtn.GetComponent<Button>().enabled && upgradeAvailable)
+            growBtn.GetComponent<Button>().enabled = true;
+        if(growBtn.GetComponent<Button>().enabled && !upgradeAvailable)
+            growBtn.GetComponent<Button>().enabled = false;
+            */
+    }
+
+    public void Upgrade() {
+        if(upgradeAvailable)
+            treeBaseClass.Grow();
+    }
+
+    public void HoverSound() {
+        if(!hoverUpgradeSound.isPlaying)
+            hoverUpgradeSound.Play();
+    }
+    public void ClickSound() {
+        if(!clickUpgradeSound.isPlaying)
+            clickUpgradeSound.Play();
+    }
+
+     IEnumerator coolDownCoroutine(int sceneIndex, float waitForSec)
+    {
+        yield return new WaitForSeconds(waitForSec);
+        Time.timeScale = 1;
+    }
+}
