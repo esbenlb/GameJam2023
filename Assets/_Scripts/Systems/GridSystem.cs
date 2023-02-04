@@ -18,7 +18,7 @@ public class GridSystem : MonoBehaviour
         go.transform.position = new Vector3(tilePosition.x, tilePosition.y, 1);
         return go;
     }
-    void GenerateMap()
+    void GenerateMap(bool spawnRooks = false)
     {
         GameObject world = new();
 
@@ -58,7 +58,7 @@ public class GridSystem : MonoBehaviour
                 float tmpTileSize = tileSize;
 
                 // Rock
-                if (Random.Range(0, 100) <= rockChance)
+                if (spawnRooks && Random.Range(0, 100) <= rockChance )
                 {
                     tmpTileSize = tileSize * Random.Range(0, 3);
                     tileType = 0;
@@ -93,7 +93,7 @@ public class GridSystem : MonoBehaviour
     void Start()
     {
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
-        GenerateMap();
+        GenerateMap(true);
     }
 
 
