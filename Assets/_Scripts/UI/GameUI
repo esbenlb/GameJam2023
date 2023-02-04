@@ -2,11 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class GameUI : MonoBehaviour
 {
+    //  values to display and text field refs
+
+    [SerializeField] public int [] values;
+    [SerializeField] TextMeshProUGUI resource1Text;
+    [SerializeField] TextMeshProUGUI resource2Text;
+    [SerializeField] TextMeshProUGUI resource3Text;
+    [SerializeField] TextMeshProUGUI resource4Text;
+
+    //  treeBase refs
+
     public TreeBase treeBaseClass;
     public static bool upgradeAvailable;
+
     //  Sound effect refs
     public  AudioSource clickUpgradeSound;
     public  AudioSource hoverUpgradeSound;
@@ -23,12 +35,20 @@ public class GameUI : MonoBehaviour
     }
 
     void Update() {
+        updateUIText();
         /*
         if(!growBtn.GetComponent<Button>().enabled && upgradeAvailable)
             growBtn.GetComponent<Button>().enabled = true;
         if(growBtn.GetComponent<Button>().enabled && !upgradeAvailable)
             growBtn.GetComponent<Button>().enabled = false;
             */
+    }
+
+    private void updateUIText() {
+        resource1Text.text = "Value 1 - " + values[0]ToString();
+        resource2Text.text = "Value 2 - " + values[1]ToString();
+        resource3Text.text = "Value 3 - " + values[2]ToString();
+        resource4Text.text = "Value 4 - " + values[3]ToString();
     }
 
     public void Upgrade() {
