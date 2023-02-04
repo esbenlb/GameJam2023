@@ -24,6 +24,11 @@ public class Menu : MonoBehaviour
 
     //  Used in pause menu
 
+    public void Continue() {
+    Time.timeScale = 1;
+    settingsMenu.SetActive(false);
+    startMenu.SetActive(false);
+   }
     public void BackToMenuSceneBtn() {
         SceneManager.LoadScene(0);
     }
@@ -65,6 +70,7 @@ public class Menu : MonoBehaviour
      IEnumerator TransitionCoroutine(int sceneIndex, float waitForSec)
     {
         yield return new WaitForSeconds(waitForSec);
+        Time.timeScale = 1;
         SceneManager.LoadScene(sceneIndex);
     }
 }
