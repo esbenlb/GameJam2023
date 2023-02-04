@@ -12,14 +12,17 @@ public class Menu : MonoBehaviour
     public  AudioSource hoverSound;
 
     //  Menu refs
-    [SerializeField] GameObject startMenu;
-    [SerializeField] GameObject settingsMenu;
-    [SerializeField] Slider globalAudioSlider;
+    public GameObject startMenu;
+    public GameObject settingsMenu;
+    public Slider globalAudioSlider;
 
     void Start() {
-        globalAudioSlider.onValueChanged.AddListener (delegate {ValueChangeCheck ();});
-        globalAudioSlider.value = 0.5f;
-        globalAudioSlider.value = AudioListener.volume;
+        if(globalAudioSlider) {
+            globalAudioSlider.onValueChanged.AddListener (delegate {ValueChangeCheck ();});
+            globalAudioSlider.value = 0.5f;
+            globalAudioSlider.value = AudioListener.volume;
+        }
+        
     }
 
     //  Used in pause menu
@@ -30,7 +33,7 @@ public class Menu : MonoBehaviour
     startMenu.SetActive(false);
    }
     public void BackToMenuSceneBtn() {
-        SceneManager.LoadScene(0);
+        StartCoroutine(TransitionCoroutine(0, clickSound.clip.length));
     }
 
     // Used in settings menu
