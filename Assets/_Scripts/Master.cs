@@ -9,9 +9,34 @@ public class Master : MonoBehaviour
     public GameObject snake;
     public GameObject[] resources;
     public List<GameObject> roots = new();
-    public Stats stats = new();
+    public Stats stats = new Stats();
     public Perks perks = new();
 
+    public int[] treeModifiers;
+    private int[] rootStats;
+    private int[] perksStats;
+
+    void Start()
+    {
+        InvokeRepeating("UpdateEverySecond", 0.0f, 1.0f);
+    }
+
+    void UpdateEverySecond()
+    {
+        GetTreeModifiers();
+        stats.water += treeModifiers[0];
+        stats.nitrogen += treeModifiers[1];
+        stats.light += treeModifiers[2];
+        stats.co2 += treeModifiers[3];
+
+    }
+
+    private void GetTreeModifiers()
+    {
+        GameObject Tree = GameObject.Find("Tree");
+        TreeBase treeBase = Tree.GetComponent<TreeBase>();
+        treeModifiers = treeBase.GetModifiers();
+    }
 
     // example funcAddPerk. in this case, can only get perk:coldResist IF has 100 water AND dosen't have heatResist
     public void AddPerkColdResist()
@@ -20,50 +45,22 @@ public class Master : MonoBehaviour
         {
             stats.water -= 100;
             perks.coldResist = true;
-
         }
     }
 }
 
 public class Perks
 {
-    private bool m_coldResist;
-    private bool m_heatResist;
-    public bool coldResist
-    {
-        get { return m_coldResist; }
-        set { m_coldResist = value; }
-    }
-    public bool heatResist
-    {
-        get { return m_heatResist; }
-        set
-        {
-                m_heatResist = value;
-        }
-    }
+    public bool coldResist;
+    public bool heatResist;
 }
 
 
 public class Stats
 {
-    private int m_water;
-    private int m_nitrogen;
-    private int m_light;
-    public int water
-    {
-        get { return m_water; }
-        set { m_water = value; }
-    }
-    public int nitrogen
-    {
-        get { return m_nitrogen; }
-        set { m_nitrogen = value; }
-    }
-    public int light
-    {
-        get { return m_light; }
-        set { m_light = value; }
-    }
+    public int water;
+    public int nitrogen;
+    public int light;
+    public int co2;
 }
 
