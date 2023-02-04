@@ -12,6 +12,4 @@ public class Resources : MonoBehaviour
         SpawingPoint,
     }
     public ResourseType CurrentResourceType = ResourseType.Rock;
-    // Start is called before the first frame update
-    
 }
