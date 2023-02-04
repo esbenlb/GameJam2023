@@ -7,6 +7,7 @@ public class Master : MonoBehaviour
 {
     public GameObject newRoot;
     public GameObject snake;
+    public GameObject[] resources;
     public List<GameObject> roots = new();
     public Stats stats = new();
     public Perks perks = new();
