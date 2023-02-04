@@ -31,6 +31,8 @@ public class GameUI : MonoBehaviour
 
     void Start() {
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
+        GameObject Tree = GameObject.Find("Tree");
+        TreeBase treeBase = Tree.GetComponent<TreeBase>();
     }
 
     void Update() {
