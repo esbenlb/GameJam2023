@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour
 {
-    float speed = 0.03f;
+    
     
 
     Vector2Int direction = Vector2Int.right;
@@ -70,24 +70,30 @@ public class SnakeMovement : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-            else if (resource.CurrentResourceType == Resources.ResourseType.Nitrogen)
-            {
-                Destroy(collision.gameObject);
-                master.stats.nitrogen += 10;
-            }
             else if (resource.CurrentResourceType == Resources.ResourseType.Water)
             {
                 Destroy(gameObject);
                 Destroy(collision.gameObject);
-                master.stats.water += 10;
+                master.AddBigWater();
             }
+            else if (resource.CurrentResourceType == Resources.ResourseType.SmallWater)
+            {
+                Destroy(collision.gameObject);
+                master.AddSmallWater();
+            }
+            else if (resource.CurrentResourceType == Resources.ResourseType.Nitrogen)
+            {
+                Destroy(collision.gameObject);
+                master.AddNitrogen();
+            }
+            
         }
 
     }
 
     void Move()
     {
-        transform.position -= new Vector3(direction.x,direction.y,0) * speed;
+        transform.position -= new Vector3(direction.x,direction.y,0) * master.speed;
         GameObject go = Instantiate(master.newRoot, transform.position, Quaternion.identity);
         go.AddComponent<BoxCollider2D>().isTrigger = true;
         go.AddComponent<Resources>().CurrentResourceType = Resources.ResourseType.SpawingPoint;
