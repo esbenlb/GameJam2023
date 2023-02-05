@@ -3234,6 +3234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c76389b4b17d44e9cc96c5024209ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dayLength: 10
   newRoot: {fileID: 4238126936003226234, guid: f648da2bef00a7d46a19671475a0e8eb, type: 3}
   snake: {fileID: 1333543554910015631, guid: 84e4889052660f44080039e046ea7fe7, type: 3}
   resources:
@@ -3243,6 +3244,7 @@ MonoBehaviour:
   - {fileID: 2574972286274840807, guid: cb6fdfd90e9631a4998116834948076f, type: 3}
   roots: []
   destroyTimer: 5.1
+  snakeSpeed: 0.03
   treeModifiers: 
   perksModifiers: 
   seasonModifiers: 
@@ -12796,7 +12798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1532019053
 Transform:
   m_ObjectHideFlags: 0
@@ -14622,8 +14624,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 1241618845}
   gameOverMenu: {fileID: 1532019052}
   gameUI: {fileID: 1508564345}
-  scoreText: {fileID: 0}
-  highScoreText: {fileID: 0}
+  scoreText: {fileID: 1212554893}
+  highScoreText: {fileID: 518980816}
 --- !u!1 &2098423097
 GameObject:
   m_ObjectHideFlags: 0
