@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
             vcam.Follow = GameObject.FindGameObjectWithTag("Player").transform;
         if(GameObject.FindGameObjectWithTag("Player") != null)
             lastPlayerPos = GameObject.FindGameObjectWithTag("PlayerVCam").transform;
-        MouseClick();
+        SpawnSnakeWithMouseClick();
         if(Input.GetKeyDown(KeyCode.Space))
             trackPlayer = !trackPlayer;
         if (fullScreen == false && Input.GetKeyDown(KeyCode.Space))
@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour
         }
         
     }
-    void MouseClick()
+    void SpawnSnakeWithMouseClick()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -70,7 +70,8 @@ public class CameraController : MonoBehaviour
                 {
                     
                     resource = hit.collider.GetComponent<Resources>();
-                    if (resource.CurrentResourceType == Resources.ResourseType.SpawingPoint)
+                    if (resource.CurrentResourceType == Resources.ResourseType.SpawingPoint &&
+                        master.SpawnRoot())
                     {
                         Instantiate(master.snake, hit.transform.position, Quaternion.identity);
                     }

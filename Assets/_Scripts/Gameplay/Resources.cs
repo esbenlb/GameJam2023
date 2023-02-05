@@ -8,6 +8,7 @@ public class Resources : MonoBehaviour
     {
         Rock,
         Water,
+        SmallWater,
         Nitrogen,
         SpawingPoint,
     }

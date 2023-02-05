@@ -13,6 +13,7 @@ public class Master : MonoBehaviour
     public Stats stats = new Stats();
     public Perks perks = new();
     public float destroyTimer = 5.1f;
+    public float speed = 0.03f;
     public int[] treeModifiers;
     public int[] perksModifiers;
     public int[] seasonModifiers;
@@ -32,6 +33,9 @@ public class Master : MonoBehaviour
     {
         GameObject Tree = GameObject.Find("Tree");
         treeBase = Tree.GetComponent<TreeBase>();
+        stats.water = 90;
+        stats.nitrogen = 100;
+        stats.light = 100;
         InvokeRepeating("UpdateEverySecond", 0.0f, 1.0f);
     }
     
@@ -81,6 +85,33 @@ public class Master : MonoBehaviour
                 break;
         }
     }
+    public bool SpawnRoot()
+    {
+        int waterCost = 30;
+        if(stats.water >= waterCost)
+        {
+            stats.water -= waterCost;
+            return true;
+        }
+        return false;
+    }
+
+    public void AddBigWater()
+    {
+        stats.water += 50;
+    }
+    public void AddSmallWater()
+    {
+        stats.water += 10;
+    }
+    public void AddNitrogen()
+    {
+        stats.nitrogen += 10;
+    }
+    public void AddLight()
+    {
+        stats.light += 10;
+    }
 
     private void GetTreeModifiers()
     {
@@ -91,10 +122,20 @@ public class Master : MonoBehaviour
     // example funcAddPerk. in this case, can only get perk:coldResist IF has 100 water AND dosen't have heatResist
     public void AddPerkColdResist()
     {
-        if (stats.water >= 100 && perks.heatResist == false)
+        int cost = 100;
+        if (stats.water >= cost && perks.heatResist == false)
         {
-            stats.water -= 100;
+            stats.water -= cost;
             perks.coldResist = true;
+        }
+    }
+    public void AddRootGrowSpeed()
+    {
+        int cost = 100;
+        if (stats.water >= cost)
+        {
+            stats.water -= cost;
+            speed += speed / 10;
         }
     }
 }
