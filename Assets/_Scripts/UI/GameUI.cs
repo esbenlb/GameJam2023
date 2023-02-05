@@ -6,8 +6,9 @@ using TMPro;
 
 public class GameUI : MonoBehaviour
 {
-    static public int dayNbr;
+    static public int dayNbr = 0;
     private Master master;
+    private GridSystem gridSystem;
 
     //  values to display and text field refs
 
@@ -32,9 +33,12 @@ public class GameUI : MonoBehaviour
     public GameObject growBtn;
 
     void Start() {
-        eventUI.SetActive(false);
-        InvokeRepeating("DayNbrHandler",/*start in*/ 2.0f ,/*every*/ 10f);
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
+        gridSystem = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<GridSystem>();
+        eventUI.SetActive(false);
+        
+        InvokeRepeating("DayNbrHandler",/*start in*/ 0.2f ,/*every*/ master.dayCicle);
+        
         GameObject Tree = GameObject.Find("Tree");
         TreeBase treeBase = Tree.GetComponent<TreeBase>();
     }
@@ -83,20 +87,50 @@ public class GameUI : MonoBehaviour
             eventUI.SetActive(false);
     }
 
+    void NewSeason(bool spawnRooks = false)
+    {
+        gridSystem.GenerateMap(spawnRooks);
+        for (int i = 0; i < master.roots.Count; i++)
+        {
+            master.roots.Remove(master.roots[i]);
+        }
+    }
+
     void DayNbrHandler()
     {
         eventUI.SetActive(true);
         dayNbr += 1;
-        /*
-        if(dayNbr >= 75)
+
+        
+        if(dayNbr == 1)
+        {
+            NewSeason(true);
+            master.SeasonSpring();
+
+        }
+        if(dayNbr == 91)
+        {
+            NewSeason();
+            master.SeasonSummer();
+        }
         //Season
-        if(dayNbr >= 150)
+        if (dayNbr == 182)
+        {
+            NewSeason();
+            master.Seasonfall();
+        }
         //Season
-        if(dayNbr >= 225)
+        if (dayNbr == 273)
+        {
+            NewSeason(true);
+            master.SeasonWinter();
+        }
         //Season
-        if(dayNbr >= 300)
-        //Season
-        */
+        if (dayNbr == 365)
+        {
+            // end game
+        }
+
 
         //  How many seconds before the eventUI is disabled
         StartCoroutine(CoolDownCoroutine(2));

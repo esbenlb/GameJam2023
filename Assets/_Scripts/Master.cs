@@ -14,7 +14,8 @@ public class Master : MonoBehaviour
     public Stats stats = new Stats();
     public Perks perks = new();
     public float destroyTimer = 5.1f;
-    public float speed = 0.03f;
+    public float snakeSpeed = 0.03f;
+    public float dayCicle = 10f;
     public int[] treeModifiers;
     public int[] perksModifiers;
     public int[] seasonModifiers;
@@ -117,6 +118,31 @@ public class Master : MonoBehaviour
         stats.light += 10;
     }
 
+    public void SeasonWinter()
+    {
+        stats.light += 0;
+        stats.water += 0;
+        stats.nitrogen += 0;
+    }
+    public void SeasonSummer()
+    {
+        stats.light += 100;
+        stats.water += 100;
+        stats.nitrogen += 100;
+    }
+    public void SeasonSpring()
+    {
+        stats.light += 50;
+        stats.water += 50;
+        stats.nitrogen += 50;
+    }
+    public void Seasonfall()
+    {
+        stats.light += 10;
+        stats.water += 50;
+        stats.nitrogen += 50;
+    }
+
     private void GetTreeModifiers()
     {
         
@@ -139,7 +165,7 @@ public class Master : MonoBehaviour
         if (stats.water >= cost)
         {
             stats.water -= cost;
-            speed += speed / 10;
+            snakeSpeed += snakeSpeed / 10;
         }
     }
 }
