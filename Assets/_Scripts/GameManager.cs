@@ -6,6 +6,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    private Master master;
     private int score;
     private int highScore;
     public GameObject pauseMenu;
@@ -25,11 +26,12 @@ public class GameManager : MonoBehaviour
             GameOver();
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
             Paused();
-        if(gameOver)
+        if(gameOver || master.stats.nitrogen < 0f || master.stats.water < 0f)
             GameOver();
     }
 
     private void NewGame() {
+        master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
         gamePaused = false;
         gameOver = false;
         Time.timeScale = 1;
