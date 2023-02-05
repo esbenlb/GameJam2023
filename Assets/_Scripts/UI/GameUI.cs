@@ -37,7 +37,7 @@ public class GameUI : MonoBehaviour
         gridSystem = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<GridSystem>();
         eventUI.SetActive(false);
         
-        InvokeRepeating("DayNbrHandler",/*start in*/ 0.2f ,/*every*/ master.dayCicle);
+        InvokeRepeating("DayNbrHandler",/*start in*/ 0.2f ,/*every*/ master.dayLength);
         
         GameObject Tree = GameObject.Find("Tree");
         TreeBase treeBase = Tree.GetComponent<TreeBase>();
@@ -87,9 +87,9 @@ public class GameUI : MonoBehaviour
             eventUI.SetActive(false);
     }
 
-    void NewSeason(bool spawnRooks = false)
+    void NewSeason(bool spawnRocks = false)
     {
-        gridSystem.GenerateMap(spawnRooks);
+        gridSystem.GenerateMap(spawnRocks);
         for (int i = 0; i < master.roots.Count; i++)
         {
             master.roots.Remove(master.roots[i]);

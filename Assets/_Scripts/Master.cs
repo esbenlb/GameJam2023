@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Master : MonoBehaviour
 {
-    private float dayLength = 0.018f; // how long a day lasts
+    public float dayLength = 10f; // how long a day lasts
     TreeBase treeBase;
     public GameObject newRoot;
     public GameObject snake;
@@ -15,7 +15,6 @@ public class Master : MonoBehaviour
     public Perks perks = new();
     public float destroyTimer = 5.1f;
     public float snakeSpeed = 0.03f;
-    public float dayCicle = 10f;
     public int[] treeModifiers;
     public int[] perksModifiers;
     public int[] seasonModifiers;
@@ -92,10 +91,10 @@ public class Master : MonoBehaviour
     }
     public bool SpawnRoot()
     {
-        int waterCost = 30;
-        if(stats.water >= waterCost)
+        int lightCost = 30;
+        if(stats.light >= lightCost)
         {
-            stats.water -= waterCost;
+            stats.light -= lightCost;
             return true;
         }
         return false;
