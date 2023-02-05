@@ -1,19 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    private int score;
+    private int highScore;
     public GameObject pauseMenu;
     public GameObject gameOverMenu;
     public GameObject gameUI;
     private bool gamePaused;
     private bool gameOver;
+
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI highScoreText;
     void Start() {
         NewGame();
     }
     void Update() {
-        
+        ScoreHandler();
+        if(score > 5)
+            GameOver();
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
             Paused();
         if(gameOver)
@@ -44,6 +53,25 @@ public class GameManager : MonoBehaviour
 
     private void GameOver() {
         Time.timeScale = 0;
+        pauseMenu.SetActive(false);
+        gameUI.SetActive(false);
         gameOverMenu.SetActive(true);
+    }
+
+    private void ScoreHandler() {
+        score = GameUI.dayNbr;
+        if(score > highScore)
+            highScore = score;
+        //  Convert to text
+        highScoreText.text = 
+        "High Score\n" +
+        highScore.ToString() +
+        "\n"
+        ;
+        scoreText.text = 
+        "Score\n" +
+        score.ToString() +
+        "\n"
+        ;
     }
 }
