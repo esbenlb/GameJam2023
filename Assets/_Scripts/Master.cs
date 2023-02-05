@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Master : MonoBehaviour
 {
+    private float dayLength = 0.018f; // how long a day lasts
     TreeBase treeBase;
     public GameObject newRoot;
     public GameObject snake;
@@ -36,10 +37,15 @@ public class Master : MonoBehaviour
         stats.water = 90;
         stats.nitrogen = 100;
         stats.light = 100;
-        InvokeRepeating("UpdateEverySecond", 0.0f, 1.0f);
+        InvokeRepeating("UpdateLoop", 0.0f, dayLength);
     }
     
     void Update()
+    {
+        
+    }
+
+    void UpdateLoop()
     {
         daysPassed++;
         season = (daysPassed % 365) / 91;
@@ -47,10 +53,7 @@ public class Master : MonoBehaviour
         {
             ChangeSeason();
         }
-    }
 
-    void UpdateEverySecond()
-    {
         GetTreeModifiers();
         SeasonModifiers();
         stats.water += treeModifiers[0] + seasonModifiers[0];
