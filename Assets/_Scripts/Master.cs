@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Master : MonoBehaviour
 {
+    public float dayLength = 10f; // how long a day lasts
+    TreeBase treeBase;
     public GameObject newRoot;
     public GameObject snake;
     public GameObject[] resources;
@@ -13,7 +15,6 @@ public class Master : MonoBehaviour
     public Perks perks = new();
     public float destroyTimer = 5.1f;
     public float snakeSpeed = 0.03f;
-    public float dayCicle = 10f;
     public int[] treeModifiers;
     public int[] perksModifiers;
     public int[] seasonModifiers;
@@ -31,11 +32,20 @@ public class Master : MonoBehaviour
 
     void Start()
     {
-        stats.water += 30;
-        InvokeRepeating("UpdateEverySecond", 0.0f, 1.0f);
+        GameObject Tree = GameObject.Find("Tree");
+        treeBase = Tree.GetComponent<TreeBase>();
+        stats.water = 90;
+        stats.nitrogen = 100;
+        stats.light = 100;
+        InvokeRepeating("UpdateLoop", 0.0f, dayLength);
     }
     
     void Update()
+    {
+        
+    }
+
+    void UpdateLoop()
     {
         daysPassed++;
         season = (daysPassed % 365) / 91;
@@ -43,15 +53,13 @@ public class Master : MonoBehaviour
         {
             ChangeSeason();
         }
-    }
 
-    void UpdateEverySecond()
-    {
         GetTreeModifiers();
-        stats.water += treeModifiers[0];
-        stats.nitrogen += treeModifiers[1];
-        stats.light += treeModifiers[2];
-        stats.co2 += treeModifiers[3];
+        SeasonModifiers();
+        stats.water += treeModifiers[0] + seasonModifiers[0];
+        stats.nitrogen += treeModifiers[1] + seasonModifiers[1];
+        stats.light += treeModifiers[2] + seasonModifiers[2];
+        stats.co2 += treeModifiers[3] + seasonModifiers[3];
 
     }
 
@@ -60,6 +68,7 @@ public class Master : MonoBehaviour
         currentSeasonIndex = (currentSeasonIndex + 1) % 4;
         currentSeason = (Season)currentSeasonIndex;
         SeasonModifiers();
+        treeBase.ChangeSprite(currentSeasonIndex);
     }
 
     public void SeasonModifiers()
@@ -82,10 +91,10 @@ public class Master : MonoBehaviour
     }
     public bool SpawnRoot()
     {
-        int waterCost = 30;
-        if(stats.water >= waterCost)
+        int lightCost = 30;
+        if(stats.light >= lightCost)
         {
-            stats.water -= waterCost;
+            stats.light -= lightCost;
             return true;
         }
         return false;
@@ -135,8 +144,7 @@ public class Master : MonoBehaviour
 
     private void GetTreeModifiers()
     {
-        GameObject Tree = GameObject.Find("Tree");
-        TreeBase treeBase = Tree.GetComponent<TreeBase>();
+        
         treeModifiers = treeBase.GetModifiers();
     }
 

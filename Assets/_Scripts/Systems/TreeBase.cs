@@ -5,11 +5,12 @@ using UnityEngine;
 public class TreeBase : MonoBehaviour
 {
     public GameObject[] prefabs;
+    public Sprite[] sprites; 
     private GameObject currentPrefab;
     private int currentGrowthIndex = 0;
     private int growthStageCount = 0;
     public GrowthStage currentGrowthStage;
-
+    public List<Vector3> positions = new List<Vector3>();
     public int waterUsage;
     public int nitrogenUsage;
     public int lightGain;
@@ -27,13 +28,81 @@ public class TreeBase : MonoBehaviour
 
     void Start()
     {
+        positions.Add(new Vector3(0,-0.5f,0));
+        positions.Add(new Vector3(0,0,0));
+        positions.Add(new Vector3(0,0.8f,-1f));
+        positions.Add(new Vector3(0,1.5f,0));
+        positions.Add(new Vector3(0,2.5f,0));
+        positions.Add(new Vector3(0,3f,0));
+
         currentGrowthStage = (GrowthStage)currentGrowthIndex;
         growthStageCount = System.Enum.GetValues(typeof(GrowthStage)).Length;
         SetPrefab();
         SetModifiers();
     }
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Grow();
+        }
+    }
 
+    public void ChangeSprite(int seasonIndex)
+    {
+        SpriteRenderer spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        //sapling
+        if (currentGrowthIndex == 2 && (seasonIndex == 0 || seasonIndex == 1))
+        {
+            //spring/summer sprite
+           spriteRenderer.sprite = sprites[0];
+        }
+        if (currentGrowthIndex == 2 && seasonIndex == 2)
+        {
+           //fall sprite 
+           spriteRenderer.sprite = sprites[1];
+        }
+        if (currentGrowthIndex == 2 && seasonIndex == 3)
+        {
+           //winter sprite 
+           spriteRenderer.sprite = sprites[2];
+        }
+
+        //young
+        if (currentGrowthIndex == 3 && (seasonIndex == 0 || seasonIndex == 1))
+        {
+           //spring,summer sprite
+           spriteRenderer.sprite = sprites[5];
+        }
+        if (currentGrowthIndex == 3 && seasonIndex == 2)
+        {
+           //fall sprite
+           spriteRenderer.sprite = sprites[4];
+        }
+        if (currentGrowthIndex == 3 && seasonIndex == 3)
+        {
+           //winter sprite 
+           spriteRenderer.sprite = sprites[3];
+        }
+
+        //mature
+        if (currentGrowthIndex == 4 && (seasonIndex == 0 || seasonIndex == 1))
+        {
+           //spring,summer sprite 
+           spriteRenderer.sprite = sprites[8];
+        }
+        if (currentGrowthIndex == 4 && seasonIndex == 2)
+        {
+           //fall sprite 
+           spriteRenderer.sprite = sprites[7];
+        }
+        if (currentGrowthIndex == 4 && seasonIndex == 3)
+        {
+           //winter sprite 
+           spriteRenderer.sprite = sprites[6];
+        }
+    }
     public int[] GetModifiers()
     {
         int[] integers = { waterUsage, nitrogenUsage, lightGain, co2Gain };
@@ -101,6 +170,7 @@ public class TreeBase : MonoBehaviour
     {
         Destroy(currentPrefab);
         currentPrefab = Instantiate(prefabs[currentGrowthIndex]);
-        currentPrefab.transform.position = transform.position;
+        currentPrefab.transform.position = positions[currentGrowthIndex];
+        currentPrefab.transform.parent = transform;
     }
 }
