@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Master : MonoBehaviour
 {
-    public float dayLength = 10f; // how long a day lasts
+    float dayLength = 2.0f; // how long a day lasts
     TreeBase treeBase;
     public GameObject newRoot;
     public GameObject snake;
@@ -43,6 +43,11 @@ public class Master : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public float GetDayLength()
+    {
+        return dayLength;
     }
 
     void UpdateLoop()
@@ -160,10 +165,10 @@ public class Master : MonoBehaviour
     }
     public void AddRootGrowSpeed()
     {
-        int cost = 100;
-        if (stats.water >= cost)
+        int cost = 25;
+        if (stats.nitrogen >= cost)
         {
-            stats.water -= cost;
+            stats.nitrogen -= cost;
             snakeSpeed += snakeSpeed / 10;
         }
     }

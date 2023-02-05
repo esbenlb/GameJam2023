@@ -41,14 +41,6 @@ public class TreeBase : MonoBehaviour
         SetModifiers();
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Grow();
-        }
-    }
-
     public void ChangeSprite(int seasonIndex)
     {
         SpriteRenderer spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -170,7 +162,8 @@ public class TreeBase : MonoBehaviour
     {
         Destroy(currentPrefab);
         currentPrefab = Instantiate(prefabs[currentGrowthIndex]);
-        currentPrefab.transform.position = positions[currentGrowthIndex];
         currentPrefab.transform.parent = transform;
+        currentPrefab.transform.position = transform.position;
+        currentPrefab.transform.position += positions[currentGrowthIndex];
     }
 }

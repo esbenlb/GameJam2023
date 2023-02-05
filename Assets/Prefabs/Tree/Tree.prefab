@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3002037917410296634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3002037917410296632}
+  - component: {fileID: 3002037917410296635}
+  m_Layer: 0
+  m_Name: Tree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3002037917410296632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002037917410296634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3002037917410296635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002037917410296634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c484693bae59444a63d0a1994307f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 3141044464597473192, guid: c31cd071d5488444ab197c19e2d78ab8, type: 3}
+  - {fileID: 61104898894972700, guid: 0fe7ba2216f72404bae26e07a9b353bb, type: 3}
+  - {fileID: 8771636744298138444, guid: de076b5af8b34c24bb5ee2a4d6132d3d, type: 3}
+  - {fileID: 61104898894972700, guid: 49b2156c7789d774981225276d1f9c8c, type: 3}
+  - {fileID: 61104898894972700, guid: 2d72230048991044282eeafb9ba5a34a, type: 3}
+  - {fileID: 61104898894972700, guid: 06257d35d79598143ad192015f22a12e, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 0b3d733e2ce35504dabba0613d09f9a5, type: 3}
+  - {fileID: 21300000, guid: 48810d66cad133a4eb065c25a000f325, type: 3}
+  - {fileID: 21300000, guid: b858b2cbfa1e1824bb273afc40372d96, type: 3}
+  - {fileID: 21300000, guid: 5f5859535bca45d4b83e1ec294b9d9d6, type: 3}
+  - {fileID: 21300000, guid: b99d782fa14b14d4584f718516e77aa6, type: 3}
+  - {fileID: 21300000, guid: 87ea30efd7d9e3346be436c984144928, type: 3}
+  - {fileID: 21300000, guid: db73ac91c4e753841854691cdb3e2756, type: 3}
+  - {fileID: 21300000, guid: ba48a997699ec474fb6903545c4d0ad3, type: 3}
+  - {fileID: 21300000, guid: 524cf42ee8a27be4b9504bf48328000d, type: 3}
+  currentGrowthStage: 0
+  positions: []
+  waterUsage: 0
+  nitrogenUsage: 0
+  lightGain: 0
+  co2Gain: 0

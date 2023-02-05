@@ -22,7 +22,7 @@ public class GameUI : MonoBehaviour
 
     //  treeBase refs
 
-    public TreeBase treeBaseClass;
+    public TreeBase treeBase;
     public static bool upgradeAvailable;
 
     //  Sound effect refs
@@ -37,10 +37,10 @@ public class GameUI : MonoBehaviour
         gridSystem = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<GridSystem>();
         eventUI.SetActive(false);
         
-        InvokeRepeating("DayNbrHandler",/*start in*/ 0.2f ,/*every*/ master.dayLength);
+        InvokeRepeating("DayNbrHandler",/*start in*/ 0.2f ,/*every*/ master.GetDayLength());
         
         GameObject Tree = GameObject.Find("Tree");
-        TreeBase treeBase = Tree.GetComponent<TreeBase>();
+        treeBase = Tree.GetComponent<TreeBase>();
     }
 
     void Update() {
@@ -67,8 +67,7 @@ public class GameUI : MonoBehaviour
     }
 
     public void Upgrade() {
-        if(upgradeAvailable)
-            treeBaseClass.Grow();
+        treeBase.Grow();
     }
 
     public void HoverSound() {
@@ -92,8 +91,9 @@ public class GameUI : MonoBehaviour
         gridSystem.GenerateMap(spawnRocks);
         for (int i = 0; i < master.roots.Count; i++)
         {
-            master.roots.Remove(master.roots[i]);
+            Destroy(master.roots[i]);
         }
+        master.roots = new();
     }
 
     void DayNbrHandler()
@@ -133,6 +133,6 @@ public class GameUI : MonoBehaviour
 
 
         //  How many seconds before the eventUI is disabled
-        StartCoroutine(CoolDownCoroutine(2));
+        StartCoroutine(CoolDownCoroutine(0.0f));
     }
 }
