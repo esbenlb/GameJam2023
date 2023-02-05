@@ -124,4 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c026d5bd37a00447b25a850ea9d005f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentResourceType: 1
+  CurrentResourceType: 2

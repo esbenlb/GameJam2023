@@ -13,6 +13,15 @@ public class GridSystem : MonoBehaviour
     public GameObject tile;
     private Master master;
 
+    // 1 to 100%
+    const float avgChange = 10;
+    float rockSmall = avgChange + 10;
+    float rockBig = avgChange + 1;
+    float waterBigChance = avgChange + 1;
+    float smallWaterChance = avgChange + 20;
+    float nitrogenChance = avgChange + 20;
+    float decreaseChangeForResource = 3;
+
     GameObject CreateTile(Vector3 tilePosition)
     {
         GameObject go = Instantiate(tile);
@@ -20,15 +29,11 @@ public class GridSystem : MonoBehaviour
         go.transform.position = new Vector3(tilePosition.x, tilePosition.y, 1);
         return go;
     }
-    void GenerateMap(bool spawnRooks = false)
+    public void GenerateMap(bool spawnRooks = false)
     {
         GameObject world = new();
 
-        // 1 to 100%
-        float rockChance = 5;
-        float waterChance = 5;
-        float smallWaterChance = 5;
-        float nitrogenChance = 5;
+        
         bool hasIncreasedSpawingRate = false;
         // Create map
         for (int y = 0; y < ySize; y++)
@@ -39,10 +44,11 @@ public class GridSystem : MonoBehaviour
             }
             if (hasIncreasedSpawingRate == false && (y % 5) == 0)
             {
-                rockChance -= 1;
-                waterChance -= 1;
-                smallWaterChance -= 1;
-                nitrogenChance -= 1;
+                rockSmall -= decreaseChangeForResource * 1.0f;
+                rockBig -= decreaseChangeForResource * 1.5f;
+                waterBigChance -= decreaseChangeForResource * 1.0f;
+                smallWaterChance -= decreaseChangeForResource * 0.7f;
+                nitrogenChance -= decreaseChangeForResource * 0.5f; ;
                 hasIncreasedSpawingRate = true;
             }
             
@@ -61,14 +67,20 @@ public class GridSystem : MonoBehaviour
                 int tileType = 0;
                 float tmpTileSize = tileSize;
 
-                // Rock
-                if (spawnRooks && Random.Range(0, 100) <= rockChance)
+                // Rock Big
+                if (spawnRooks && Random.Range(0, 100) <= rockBig)
                 {
-                    tmpTileSize = tileSize * Random.Range(0, 3);
+                    tmpTileSize = tileSize * 4;
+                    tileType = 0;
+                }
+                // Rock small
+                else if (Random.Range(0, 100) <= rockSmall)
+                {
+                    tmpTileSize = tileSize * 2;
                     tileType = 0;
                 }
                 // water
-                else if (Random.Range(0, 100) <= waterChance)
+                else if (Random.Range(0, 100) <= waterBigChance)
                 {
                     tmpTileSize = tileSize * Random.Range(1, 3);
                     tileType = 1;
@@ -102,22 +114,22 @@ public class GridSystem : MonoBehaviour
     void Start()
     {
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
-        GenerateMap(true);
+        //GenerateMap(true);
     }
 
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Destroy(GetTile());
-        }
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            GetNeighbors();
-        }
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Mouse0))
+    //    {
+    //        Destroy(GetTile());
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Mouse0))
+    //    {
+    //        GetNeighbors();
+    //    }
+    //}
     GameObject GetTile()
     {
         Vector2Int tilePosition = GetTilePostionInWorld();
