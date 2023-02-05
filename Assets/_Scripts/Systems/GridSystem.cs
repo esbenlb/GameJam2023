@@ -5,9 +5,9 @@ using UnityEngine;
 public class GridSystem : MonoBehaviour
 {   
     //  Set size
-    const int xSize = 275, ySize = 105;
+    const int xSize = 275 /4, ySize = 105 / 4;
     const int bla = ySize / 5;
-    float tileSize = 0.15f;
+    float tileSize = 0.15f * 4;
     //public int halfX, halfY;
     public GameObject[][] tiles = new GameObject[ySize][];
     public GameObject tile;
@@ -27,6 +27,7 @@ public class GridSystem : MonoBehaviour
         // 1 to 100%
         float rockChance = 5;
         float waterChance = 5;
+        float smallWaterChance = 5;
         float nitrogenChance = 5;
         bool hasIncreasedSpawingRate = false;
         // Create map
@@ -40,6 +41,7 @@ public class GridSystem : MonoBehaviour
             {
                 rockChance -= 1;
                 waterChance -= 1;
+                smallWaterChance -= 1;
                 nitrogenChance -= 1;
                 hasIncreasedSpawingRate = true;
             }
@@ -60,7 +62,7 @@ public class GridSystem : MonoBehaviour
                 float tmpTileSize = tileSize;
 
                 // Rock
-                if (spawnRooks && Random.Range(0, 100) <= rockChance )
+                if (spawnRooks && Random.Range(0, 100) <= rockChance)
                 {
                     tmpTileSize = tileSize * Random.Range(0, 3);
                     tileType = 0;
@@ -68,13 +70,18 @@ public class GridSystem : MonoBehaviour
                 // water
                 else if (Random.Range(0, 100) <= waterChance)
                 {
-                    tmpTileSize = tileSize *Random.Range(0, 3);
+                    tmpTileSize = tileSize * Random.Range(1, 3);
                     tileType = 1;
+                }
+                // small water
+                else if (Random.Range(0, 100) <= smallWaterChance)
+                {
+                    tileType = 2;
                 }
                 // nitrogen
                 else if (Random.Range(0, 100) <= nitrogenChance)
                 {
-                    tileType = 2;
+                    tileType = 3;
                 }
                 else 
                 {
