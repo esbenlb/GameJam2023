@@ -6,13 +6,18 @@ using TMPro;
 
 public class GameUI : MonoBehaviour
 {
-
+    static public int dayNbr;
     private Master master;
 
     //  values to display and text field refs
 
     [SerializeField] TextMeshProUGUI resourcesText;
     [SerializeField] TextMeshProUGUI resourcesTextVals;
+    [SerializeField] TextMeshProUGUI eventHeadline;
+
+    //  UI interface objects
+
+    [SerializeField] GameObject eventUI;
 
     //  treeBase refs
 
@@ -27,6 +32,8 @@ public class GameUI : MonoBehaviour
     public GameObject growBtn;
 
     void Start() {
+        eventUI.SetActive(false);
+        InvokeRepeating("DayNbrHandler",/*start in*/ 2.0f ,/*every*/ 10f);
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
         GameObject Tree = GameObject.Find("Tree");
         TreeBase treeBase = Tree.GetComponent<TreeBase>();
@@ -49,6 +56,10 @@ public class GameUI : MonoBehaviour
         master.stats.water.ToString("D2") + "\n" +
         master.stats.nitrogen.ToString("D2") + "\n"
         ;
+        eventHeadline.text =
+        "Day " +
+        dayNbr.ToString()
+        ;
     }
 
     public void Upgrade() {
@@ -65,9 +76,29 @@ public class GameUI : MonoBehaviour
             clickUpgradeSound.Play();
     }
 
-     IEnumerator coolDownCoroutine(int sceneIndex, float waitForSec)
+     IEnumerator CoolDownCoroutine(float waitForSec)
     {
         yield return new WaitForSeconds(waitForSec);
-        Time.timeScale = 1;
+        if(eventUI.activeSelf)
+            eventUI.SetActive(false);
+    }
+
+    void DayNbrHandler()
+    {
+        eventUI.SetActive(true);
+        dayNbr += 1;
+        /*
+        if(dayNbr >= 75)
+        //Season
+        if(dayNbr >= 150)
+        //Season
+        if(dayNbr >= 225)
+        //Season
+        if(dayNbr >= 300)
+        //Season
+        */
+
+        //  How many seconds before the eventUI is disabled
+        StartCoroutine(CoolDownCoroutine(2));
     }
 }
