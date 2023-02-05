@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
         NewGame();
     }
     void Update() {
+        
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
             Paused();
         if(gameOver)
