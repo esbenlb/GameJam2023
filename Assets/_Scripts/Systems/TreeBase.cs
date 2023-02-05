@@ -51,46 +51,56 @@ public class TreeBase : MonoBehaviour
 
     public void ChangeSprite(int seasonIndex)
     {
+        SpriteRenderer spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         //sapling
         if (currentGrowthIndex == 2 && (seasonIndex == 0 || seasonIndex == 1))
         {
-           //spring,summer sprite 
+            //spring/summer sprite
+           spriteRenderer.sprite = sprites[0];
         }
         if (currentGrowthIndex == 2 && seasonIndex == 2)
         {
            //fall sprite 
+           spriteRenderer.sprite = sprites[1];
         }
         if (currentGrowthIndex == 2 && seasonIndex == 3)
         {
            //winter sprite 
+           spriteRenderer.sprite = sprites[2];
         }
 
         //young
         if (currentGrowthIndex == 3 && (seasonIndex == 0 || seasonIndex == 1))
         {
-           //spring,summer sprite 
+           //spring,summer sprite
+           spriteRenderer.sprite = sprites[5];
         }
         if (currentGrowthIndex == 3 && seasonIndex == 2)
         {
-           //fall sprite 
+           //fall sprite
+           spriteRenderer.sprite = sprites[4];
         }
         if (currentGrowthIndex == 3 && seasonIndex == 3)
         {
            //winter sprite 
+           spriteRenderer.sprite = sprites[3];
         }
 
         //mature
         if (currentGrowthIndex == 4 && (seasonIndex == 0 || seasonIndex == 1))
         {
            //spring,summer sprite 
+           spriteRenderer.sprite = sprites[8];
         }
         if (currentGrowthIndex == 4 && seasonIndex == 2)
         {
            //fall sprite 
+           spriteRenderer.sprite = sprites[7];
         }
         if (currentGrowthIndex == 4 && seasonIndex == 3)
         {
            //winter sprite 
+           spriteRenderer.sprite = sprites[6];
         }
     }
     public int[] GetModifiers()

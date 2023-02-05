@@ -65,6 +65,7 @@ public class Master : MonoBehaviour
         currentSeasonIndex = (currentSeasonIndex + 1) % 4;
         currentSeason = (Season)currentSeasonIndex;
         SeasonModifiers();
+        treeBase.ChangeSprite(currentSeasonIndex);
     }
 
     public void SeasonModifiers()
