@@ -13,8 +13,8 @@ public class Master : MonoBehaviour
     public List<GameObject> roots = new();
     public Stats stats = new Stats();
     public Perks perks = new();
-    public float destroyTimer = 5.1f;
-    public float snakeSpeed = 0.03f;
+    public float destroyTimer = 15.0f;
+    public float snakeSpeed = 0.05f;
     public int[] treeModifiers;
     public int[] perksModifiers;
     public int[] seasonModifiers;

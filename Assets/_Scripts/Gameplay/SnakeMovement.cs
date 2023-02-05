@@ -93,7 +93,7 @@ public class SnakeMovement : MonoBehaviour
 
     void Move()
     {
-        transform.position -= new Vector3(direction.x,direction.y,0) * master.snakeSpeed;
+        transform.position -= new Vector3(direction.x,direction.y,1) * master.snakeSpeed;
         GameObject go = Instantiate(master.newRoot, transform.position, Quaternion.identity);
         go.AddComponent<BoxCollider2D>().isTrigger = true;
         go.AddComponent<Resources>().CurrentResourceType = Resources.ResourseType.SpawingPoint;
