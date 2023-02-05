@@ -13,7 +13,10 @@ public class GameUI : MonoBehaviour
     //  values to display and text field refs
 
     [SerializeField] TextMeshProUGUI resourcesText;
-    [SerializeField] TextMeshProUGUI resourcesTextVals;
+    [SerializeField] TextMeshProUGUI resourcesTextVal1;
+    [SerializeField] TextMeshProUGUI resourcesTextVal2;
+    [SerializeField] TextMeshProUGUI resourcesTextVal3;
+    [SerializeField] TextMeshProUGUI resourcesTextVal4;
     [SerializeField] TextMeshProUGUI eventHeadline;
 
     //  UI interface objects
@@ -32,7 +35,12 @@ public class GameUI : MonoBehaviour
     //  Button refs
     public GameObject growBtn;
 
+    private Color prevWaterCol;
+    private Color prevNitroCol;
+
     void Start() {
+        prevWaterCol = resourcesTextVal1.color;
+        prevNitroCol = resourcesTextVal2.color;
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
         gridSystem = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<GridSystem>();
         eventUI.SetActive(false);
@@ -54,16 +62,37 @@ public class GameUI : MonoBehaviour
         "Water\n"+
         "Nitrogen\n"
         ;
-        resourcesTextVals.text =
-        master.stats.co2.ToString("D2") + "\n" +
-        master.stats.light.ToString("D2") + "\n" +
-        master.stats.water.ToString("D2") + "\n" +
-        master.stats.nitrogen.ToString("D2") + "\n"
+        resourcesTextVal1.text =
+        master.stats.water.ToString("D2")
+        ;
+        resourcesTextVal2.text =
+        "\n" +
+        master.stats.nitrogen.ToString("D2")
+        ;
+        resourcesTextVal3.text =
+        "\n" +
+        "\n" +
+        master.stats.co2.ToString("D2")
+        ;
+        resourcesTextVal4.text =
+        "\n" +
+        "\n" +
+        "\n" +
+        master.stats.light.ToString("D2")
         ;
         eventHeadline.text =
         "Day " +
         dayNbr.ToString()
         ;
+        if(master.stats.water <= 5f)
+            resourcesTextVal1.color = new Color(1,0,0,1);
+        else if(master.stats.water > 5f)
+            resourcesTextVal1.color = prevNitroCol;
+        if(master.stats.nitrogen <= 5f)
+            resourcesTextVal2.color = new Color(1,0,0,1);
+        else if(master.stats.nitrogen > 5f)
+            resourcesTextVal2.color = prevNitroCol;
+
     }
 
     public void Upgrade() {
