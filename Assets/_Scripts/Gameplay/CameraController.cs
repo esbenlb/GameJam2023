@@ -1,37 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
+    private CinemachineVirtualCamera vcam;
     private Master master;
     GameObject camera;
 
     private Vector3 initCamPos;
+    private Transform lastPlayerPos;
     bool fullScreen = true;
+
+    bool trackPlayer = false;
     // Start is called before the first frame update
     void Start()
     {
+        vcam = GameObject.FindGameObjectWithTag("CinemachineVCam").GetComponent<CinemachineVirtualCamera>();
         master = GameObject.FindGameObjectsWithTag("Master")[0].GetComponent<Master>();
         camera = transform.GetChild(0).gameObject;
         initCamPos = camera.transform.position;
+        lastPlayerPos = GameObject.FindGameObjectWithTag("TreeCam").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(trackPlayer == true){
+            if(GameObject.FindGameObjectWithTag("Player") != null)
+                vcam.Follow = GameObject.FindGameObjectWithTag("Player").transform;
+            else
+                vcam.Follow = lastPlayerPos;
+        }
+        if(trackPlayer == false && GameObject.FindGameObjectWithTag("Player") == null)
+            vcam.Follow = GameObject.FindGameObjectWithTag("TreeCam").transform;
+        else if(GameObject.FindGameObjectWithTag("Player") != null)
+            vcam.Follow = GameObject.FindGameObjectWithTag("Player").transform;
+        if(GameObject.FindGameObjectWithTag("Player") != null)
+            lastPlayerPos = GameObject.FindGameObjectWithTag("PlayerVCam").transform;
         MouseClick();
+        if(Input.GetKeyDown(KeyCode.Space))
+            trackPlayer = !trackPlayer;
         if (fullScreen == false && Input.GetKeyDown(KeyCode.Space))
         {
-            camera.transform.position = new(10, 4.45f, -10);
-            camera.GetComponent<Camera>().orthographicSize = 5;
             fullScreen = true;
+            camera.GetComponent<Camera>().orthographicSize = 5;
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            camera.transform.position = new(10.1f, 2.0f, -10);
-            camera.GetComponent<Camera>().orthographicSize = 2.5f;
             fullScreen = false;
+            camera.GetComponent<Camera>().orthographicSize = 2.5f;
         }
         
     }
