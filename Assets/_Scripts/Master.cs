@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Master : MonoBehaviour
 {
+    TreeBase treeBase;
     public GameObject newRoot;
     public GameObject snake;
     public GameObject[] resources;
@@ -29,6 +30,8 @@ public class Master : MonoBehaviour
 
     void Start()
     {
+        GameObject Tree = GameObject.Find("Tree");
+        treeBase = Tree.GetComponent<TreeBase>();
         InvokeRepeating("UpdateEverySecond", 0.0f, 1.0f);
     }
     
@@ -81,8 +84,7 @@ public class Master : MonoBehaviour
 
     private void GetTreeModifiers()
     {
-        GameObject Tree = GameObject.Find("Tree");
-        TreeBase treeBase = Tree.GetComponent<TreeBase>();
+        
         treeModifiers = treeBase.GetModifiers();
     }
 

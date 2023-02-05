@@ -237,12 +237,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 49434031239189563, guid: 70c8970240751e440a7635cbe505b210, type: 3}
-  - {fileID: 4238126936003226234, guid: 1ac48d15f5f7c2749bfb711816a887b7, type: 3}
-  - {fileID: 4238126936003226234, guid: f648da2bef00a7d46a19671475a0e8eb, type: 3}
-  - {fileID: 2574972286274840807, guid: f0cba0d2d36e32044be14a7c5a9a7d57, type: 3}
-  - {fileID: 2574972286274840807, guid: e424f420013477c44b11e4aa4e783f37, type: 3}
-  - {fileID: 3798561823973134373, guid: 43cae8980959d144c832a7c9c14bb916, type: 3}
+  - {fileID: 3141044464597473192, guid: c31cd071d5488444ab197c19e2d78ab8, type: 3}
+  - {fileID: 61104898894972700, guid: 0fe7ba2216f72404bae26e07a9b353bb, type: 3}
+  - {fileID: 8771636744298138444, guid: de076b5af8b34c24bb5ee2a4d6132d3d, type: 3}
+  - {fileID: 61104898894972700, guid: 49b2156c7789d774981225276d1f9c8c, type: 3}
+  - {fileID: 61104898894972700, guid: 2d72230048991044282eeafb9ba5a34a, type: 3}
+  - {fileID: 61104898894972700, guid: 06257d35d79598143ad192015f22a12e, type: 3}
   currentGrowthStage: 0
   waterUsage: 0
   nitrogenUsage: 0
@@ -296,7 +296,14 @@ MonoBehaviour:
   snake: {fileID: 0}
   resources: []
   roots: []
-  treeStats: []
+  destroyTimer: 5.1
+  treeModifiers: 
+  perksModifiers: 
+  seasonModifiers: 
+  currentSeason: 0
+  currentSeasonIndex: 0
+  daysPassed: 0
+  season: 0
 --- !u!4 &1858766471
 Transform:
   m_ObjectHideFlags: 0
