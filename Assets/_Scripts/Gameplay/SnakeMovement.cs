@@ -92,6 +92,7 @@ public class SnakeMovement : MonoBehaviour
         go.AddComponent<BoxCollider2D>().isTrigger = true;
         go.AddComponent<Resources>().CurrentResourceType = Resources.ResourseType.SpawingPoint;
         go.transform.parent = master.transform;
+        go.tag = "PlayerRoot";
         master.roots.Add(go);
     }
 }
