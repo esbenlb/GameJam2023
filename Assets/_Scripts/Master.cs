@@ -45,10 +45,11 @@ public class Master : MonoBehaviour
     void UpdateEverySecond()
     {
         GetTreeModifiers();
-        stats.water += treeModifiers[0];
-        stats.nitrogen += treeModifiers[1];
-        stats.light += treeModifiers[2];
-        stats.co2 += treeModifiers[3];
+        SeasonModifiers();
+        stats.water += treeModifiers[0] + seasonModifiers[0];
+        stats.nitrogen += treeModifiers[1] + seasonModifiers[1];
+        stats.light += treeModifiers[2] + seasonModifiers[2];
+        stats.co2 += treeModifiers[3] + seasonModifiers[3];
 
     }
 
